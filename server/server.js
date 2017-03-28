@@ -15,6 +15,7 @@ var express = require('express'),
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
+var {ObjectID} = require('mongodb');
 
 var app = express();
 
@@ -44,6 +45,31 @@ app.get('/todos', function(req, res) {
 	}, function(err) {
 		res.status(400).send(err);
 	});
+});
+
+// show route?
+app.get('/todos/:id', function(req, res) {
+	// res.send(req.params.id);
+	var id = req.params.id;
+
+	if(!ObjectID.isValid(id)) {
+		return res.status(404).send();
+	}
+
+
+
+	Todo.findById(id).then(function(todo) {
+		if (!todo) {
+			return res.status(404).send();
+		}
+		// res.send(todo);
+		res.send({todo:todo});
+		// res.send('Found the user ' + todo._id);
+	}).catch(function(err) {
+		res.status(400).send();
+	});
+
+
 });
 
 
