@@ -21,7 +21,7 @@ var app = express();
 
 app.use(bodyParser.json());
 
-
+// create route
 app.post('/todos', function(req, res) {
 	// console.log(req.body);
 	var todo = new Todo({
@@ -35,8 +35,16 @@ app.post('/todos', function(req, res) {
 	});
 });
 
-
-
+// index route
+app.get('/todos', function(req, res) {
+	Todo.find().then(function(todos) {
+		res.send({
+			todos: todos
+		});
+	}, function(err) {
+		res.status(400).send(err);
+	});
+});
 
 
 app.listen(3000, function() {
