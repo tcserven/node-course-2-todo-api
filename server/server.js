@@ -43,6 +43,11 @@ app.listen(3000, function() {
 	console.log("Server has started on port 3000");
 });
 
+// for testing stuff
+module.exports = {
+	app:app
+};
+
 
 
 
