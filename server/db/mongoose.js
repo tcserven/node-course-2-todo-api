@@ -4,9 +4,9 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 // connecting to mlab here
-let db = {
+var db = {
 	localhost: 'mongodb://localhost:27017/TodoApp',
-	mlab: 'mongodb://<dbuser>:<dbpassword>@ds145380.mlab.com:45380/section-7-app'
+	mlab: 'mongodb://user:user@ds145380.mlab.com:45380/section-7-app'
 };
 
 mongoose.connect(process.env.PORT ? db.mlab : db.localhost);
